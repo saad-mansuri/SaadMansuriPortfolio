@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { Terminal, Sun, Moon, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -36,8 +36,10 @@ export const Navbar = () => {
     opacity: 0,
   });
 
-  const updateIndicator = () => {
-    const activeEl = linkRefs.current[activeSection];
+  const activeSectionKey = isHomePage ? activeSection : "projects";
+
+  const updateIndicator = useCallback(() => {
+    const activeEl = linkRefs.current[activeSectionKey];
     const container = navContainerRef.current;
     if (activeEl && container) {
       const activeRect = activeEl.getBoundingClientRect();
@@ -51,23 +53,17 @@ export const Navbar = () => {
         opacity: 1,
       });
     }
-  };
-
-  useEffect(() => {
-    if (!isHomePage) {
-      setActiveSection("projects");
-    }
-  }, [pathname, isHomePage]);
+  }, [activeSectionKey]);
 
   useEffect(() => {
     const frame = requestAnimationFrame(updateIndicator);
     return () => cancelAnimationFrame(frame);
-  }, [activeSection]);
+  }, [updateIndicator]);
 
   useEffect(() => {
     window.addEventListener("resize", updateIndicator);
     return () => window.removeEventListener("resize", updateIndicator);
-  }, [activeSection]);
+  }, [updateIndicator]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -175,7 +171,7 @@ export const Navbar = () => {
 
             {navLinks.map((link) => {
               const sectionId = link.href.replace("#", "");
-              const isActive = activeSection === sectionId;
+              const isActive = activeSectionKey === sectionId;
               const targetHref = isHomePage ? link.href : `/${link.href}`;
               return (
                 <Link
@@ -251,7 +247,7 @@ export const Navbar = () => {
           <div className="p-2.5 rounded-2xl border border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 backdrop-blur-2xl shadow-2xl flex flex-col gap-0.5">
             {navLinks.map((link) => {
               const sectionId = link.href.replace("#", "");
-              const isActive = activeSection === sectionId;
+              const isActive = activeSectionKey === sectionId;
               const targetHref = isHomePage ? link.href : `/${link.href}`;
               return (
                 <Link

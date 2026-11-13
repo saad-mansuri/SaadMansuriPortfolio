@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../Icons";
@@ -8,6 +8,7 @@ import { RainbowRevealText } from "../RainbowRevealText";
 import { personalInfo } from "../../data/portfolioData";
 
 export const Hero = () => {
+  const [imgSrc, setImgSrc] = useState("/images/saad-mansuri.webp");
   return (
     <header className="w-full text-left pt-6 sm:pt-10 pb-4 relative z-10">
       <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 md:gap-10">
@@ -81,13 +82,22 @@ export const Hero = () => {
 
         {/* Right Column: Profile Image as a Clean Content Element */}
         <div className="shrink-0 flex justify-start md:justify-end">
-          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden">
+          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-zinc-800/20">
             <Image
-              src="/images/saad-mansuri.webp"
+              src={imgSrc}
               alt="Saad Mansuri - Senior Fullstack Developer"
               width={360}
               height={360}
               priority
+              unoptimized
+              onError={() => {
+                setImgSrc((current) => {
+                  if (current === "/images/saad-mansuri.webp") return "/images/saad-mansuri.jpg";
+                  if (current === "/images/saad-mansuri.jpg") return "/saad-mansuri.webp";
+                  if (current === "/saad-mansuri.webp") return "/saad-mansuri.jpg";
+                  return current;
+                });
+              }}
               className="w-full h-full object-cover object-center"
             />
           </div>

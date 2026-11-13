@@ -13,30 +13,31 @@ interface PortfolioContextType {
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 
 export const PortfolioProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isDark, setIsDark] = useState<boolean>(true);
-  const [isTerminalMode, setIsTerminalMode] = useState<boolean>(false);
-  const [mounted, setMounted] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("sm-theme");
+      if (savedTheme) return savedTheme === "dark";
+      return !document.documentElement.classList.contains("light");
+    }
+    return true;
+  });
+
+  const [isTerminalMode, setIsTerminalMode] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("sm-terminal-mode") === "true";
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // Read saved theme
-    const savedTheme = localStorage.getItem("sm-theme");
-    const initialDark = savedTheme ? savedTheme === "dark" : true; // Default dark
-    setIsDark(initialDark);
-
-    if (initialDark) {
+    if (isDark) {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
     } else {
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
     }
-
-    // Read saved terminal state
-    const savedTerminal = localStorage.getItem("sm-terminal-mode") === "true";
-    setIsTerminalMode(savedTerminal);
-
-    setMounted(true);
-  }, []);
+  }, [isDark]);
 
   const toggleTheme = (e?: React.MouseEvent<HTMLButtonElement>) => {
     const nextDark = !isDark;
@@ -52,12 +53,16 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
       }
     };
 
+    const doc = document as Document & {
+      startViewTransition?: (updateCallback: () => void) => { ready?: Promise<void> };
+    };
+
     const isViewTransitionSupported =
       typeof document !== "undefined" &&
-      "startViewTransition" in document &&
+      typeof doc.startViewTransition === "function" &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!isViewTransitionSupported || !e) {
+    if (!isViewTransitionSupported || !e || !doc.startViewTransition) {
       applyThemeChange();
       return;
     }
@@ -71,7 +76,7 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
       Math.max(y, window.innerHeight - y)
     );
 
-    const transition = (document as any).startViewTransition(() => {
+    const transition = doc.startViewTransition(() => {
       applyThemeChange();
     });
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { education, certifications } from "../../data/portfolioData";
-import { GraduationCap, Award, ExternalLink } from "lucide-react";
+import { GraduationCap, Award } from "lucide-react";
 
 export const EducationAndCerts = () => {
   return (
