@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PortfolioShell } from "../components/PortfolioShell";
+import { SITE_URL, BASE_PATH } from "../data/portfolioData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,17 +14,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://saadmansuri.dev";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Saad Mansuri | Senior Fullstack Developer",
     template: "%s | Saad Mansuri",
   },
   description:
     "Personal portfolio of Saad Mansuri. Senior Fullstack & Frontend Developer with 5+ years of experience engineering enterprise SaaS platforms, cybersecurity risk management architectures, and high-performance frontend ecosystems.",
-  authors: [{ name: "Saad Mansuri", url: siteUrl }],
+  authors: [{ name: "Saad Mansuri", url: SITE_URL }],
   creator: "Saad Mansuri",
   publisher: "Saad Mansuri",
   keywords: [
@@ -45,19 +44,19 @@ export const metadata: Metadata = {
     "India",
   ],
   alternates: {
-    canonical: "/",
+    canonical: SITE_URL,
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl,
+    url: SITE_URL,
     title: "Saad Mansuri | Senior Fullstack Developer",
     description:
       "Senior Fullstack Developer with 5+ years of experience engineering enterprise cybersecurity SaaS platforms, dynamic survey engines, and high-performance design systems.",
     siteName: "Saad Mansuri Portfolio",
     images: [
       {
-        url: "/images/saad-mansuri.webp",
+        url: `${SITE_URL}/images/saad-mansuri.webp`,
         width: 1200,
         height: 630,
         alt: "Saad Mansuri - Senior Fullstack Developer",
@@ -69,7 +68,7 @@ export const metadata: Metadata = {
     title: "Saad Mansuri | Senior Fullstack Developer",
     description:
       "Senior Fullstack Developer specializing in React.js, Next.js, Vue.js, TypeScript, and enterprise SaaS platforms in cybersecurity risk management.",
-    images: ["/images/saad-mansuri.webp"],
+    images: [`${SITE_URL}/images/saad-mansuri.webp`],
   },
   robots: {
     index: true,
@@ -83,8 +82,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: `${BASE_PATH}/favicon.ico`,
+    apple: `${BASE_PATH}/favicon.ico`,
   },
 };
 
@@ -93,11 +92,11 @@ const personSchema = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": `${siteUrl}/#person`,
+      "@id": `${SITE_URL}/#person`,
       name: "Saad Mansuri",
       jobTitle: "Senior Fullstack Developer",
-      url: siteUrl,
-      image: `${siteUrl}/images/saad-mansuri.webp`,
+      url: SITE_URL,
+      image: `${SITE_URL}/images/saad-mansuri.webp`,
       description:
         "Senior Fullstack & Frontend Developer with 5+ years of experience engineering enterprise SaaS platforms in cybersecurity risk management.",
       address: {
@@ -130,11 +129,11 @@ const personSchema = {
     },
     {
       "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: siteUrl,
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
       name: "Saad Mansuri Portfolio",
       publisher: {
-        "@id": `${siteUrl}/#person`,
+        "@id": `${SITE_URL}/#person`,
       },
       description:
         "Official portfolio of Saad Mansuri - Senior Fullstack Developer specializing in React.js, Next.js, and cybersecurity SaaS.",

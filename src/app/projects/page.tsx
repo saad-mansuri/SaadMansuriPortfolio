@@ -2,19 +2,20 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Projects } from "../../components/sections/Projects";
+import { SITE_URL } from "../../data/portfolioData";
 
 export const metadata: Metadata = {
   title: "Key Projects & Platforms",
   description:
     "Explore enterprise SaaS platforms, cybersecurity risk modeling architectures, dynamic survey engines, and production web applications built by Saad Mansuri.",
   alternates: {
-    canonical: "/projects",
+    canonical: `${SITE_URL}/projects`,
   },
   openGraph: {
     title: "Key Projects & Platforms | Saad Mansuri",
     description:
       "Enterprise systems engineered for cybersecurity intelligence, risk modeling, dynamic survey workflows, and multi-tenant SaaS.",
-    url: "/projects",
+    url: `${SITE_URL}/projects`,
   },
 };
 
