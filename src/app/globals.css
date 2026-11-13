@@ -1,0 +1,347 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --primary: #3b82f6;
+  --muted: #a1a1aa;
+  --border: #18181b;
+}
+
+html.dark {
+  color-scheme: dark;
+  --background: #050505;
+  --foreground: #ffffff;
+}
+
+html.light {
+  color-scheme: light;
+  --background: #fafafa;
+  --foreground: #09090b;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Circular Reveal View Transitions
+   ========================================================================== */
+::view-transition-group(root) {
+  animation-duration: 0.65s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+::view-transition-old(root) {
+  z-index: 1 !important;
+}
+
+::view-transition-new(root) {
+  z-index: 9999 !important;
+}
+
+/* ==========================================================================
+   Saad Mansuri ("SM") Calligraphy Stroke Loops & Hover Redraw
+   ========================================================================== */
+.sm-stroke-1 {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: loopSm1 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.sm-stroke-2 {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: loopSm2 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.sm-stroke-3 {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: loopSm3 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes loopSm1 {
+  0% {
+    stroke-dashoffset: 90;
+    opacity: 0.25;
+  }
+  6% {
+    opacity: 1;
+  }
+  24% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  92% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  97% {
+    stroke-dashoffset: 0;
+    opacity: 0.25;
+  }
+  100% {
+    stroke-dashoffset: 90;
+    opacity: 0.25;
+  }
+}
+
+@keyframes loopSm2 {
+  0%, 8% {
+    stroke-dashoffset: 120;
+    opacity: 0.25;
+  }
+  14% {
+    opacity: 1;
+  }
+  34% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  92% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  97% {
+    stroke-dashoffset: 0;
+    opacity: 0.25;
+  }
+  100% {
+    stroke-dashoffset: 120;
+    opacity: 0.25;
+  }
+}
+
+@keyframes loopSm3 {
+  0%, 18% {
+    stroke-dashoffset: 60;
+    opacity: 0.25;
+  }
+  24% {
+    opacity: 1;
+  }
+  42% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  92% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  97% {
+    stroke-dashoffset: 0;
+    opacity: 0.25;
+  }
+  100% {
+    stroke-dashoffset: 60;
+    opacity: 0.25;
+  }
+}
+
+/* Hover re-draw animation */
+.group:hover .sm-stroke-1 {
+  animation: redrawSm1 0.7s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.group:hover .sm-stroke-2 {
+  animation: redrawSm2 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.group:hover .sm-stroke-3 {
+  animation: redrawSm3 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes redrawSm1 {
+  0% {
+    stroke-dashoffset: 90;
+    opacity: 0.3;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes redrawSm2 {
+  0%, 15% {
+    stroke-dashoffset: 120;
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes redrawSm3 {
+  0%, 30% {
+    stroke-dashoffset: 60;
+    opacity: 0.3;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Light Mode Overrides & Adjustments
+   ========================================================================== */
+html.light body {
+  background-color: #fafafa !important;
+  color: #09090b !important;
+}
+
+html.light .text-white {
+  color: #09090b !important;
+}
+
+html.light .text-zinc-100 {
+  color: #18181b !important;
+}
+
+html.light .text-zinc-200 {
+  color: #27272a !important;
+}
+
+html.light .text-zinc-300 {
+  color: #27272a !important;
+}
+
+html.light .text-zinc-400 {
+  color: #52525b !important;
+}
+
+html.light .text-zinc-500 {
+  color: #71717a !important;
+}
+
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .divide-white\/5 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .bg-white\/5,
+html.light .bg-white\/10,
+html.light .bg-white\/\[0\.02\],
+html.light .bg-white\/\[0\.03\],
+html.light .bg-white\/\[0\.04\],
+html.light .bg-white\/\[0\.08\] {
+  background-color: rgba(0, 0, 0, 0.035) !important;
+}
+
+html.light .hover\:bg-white\/10:hover,
+html.light .hover\:bg-white\/\[0\.08\]:hover {
+  background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+html.light .hover\:text-white:hover {
+  color: #09090b !important;
+}
+
+html.light .group:hover .group-hover\:text-white {
+  color: #09090b !important;
+}
+
+/* Maintain crisp white text on colored solid buttons in light mode */
+html.light .bg-blue-600,
+html.light .bg-blue-500,
+html.light .bg-emerald-600,
+html.light .bg-emerald-500,
+html.light .bg-blue-600.text-white,
+html.light .bg-blue-500.text-white {
+  color: #ffffff !important;
+}
+html.light .bg-blue-600 *,
+html.light .bg-blue-500 * {
+  color: #ffffff !important;
+}
+
+/* Shield Terminal Shell from Light Mode text inversions */
+html.light .terminal-shell {
+  color-scheme: dark !important;
+}
+html.light .terminal-shell .text-white {
+  color: #ffffff !important;
+}
+html.light .terminal-shell .text-zinc-100 {
+  color: #f4f4f5 !important;
+}
+html.light .terminal-shell .text-zinc-200 {
+  color: #e4e4e7 !important;
+}
+html.light .terminal-shell .text-zinc-300 {
+  color: #d4d4d8 !important;
+}
+html.light .terminal-shell .text-zinc-400 {
+  color: #a1a1aa !important;
+}
+html.light .terminal-shell .text-zinc-500 {
+  color: #71717a !important;
+}
+html.light .terminal-shell .border-white\/10,
+html.light .terminal-shell .border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html.light .terminal-shell .bg-white\/10,
+html.light .terminal-shell .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ==========================================================================
+   Terminal Scrollbars
+   ========================================================================== */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 197, 94, 0.4);
+}
+
+/* ==========================================================================
+   Development Indicator Overlay Suppress
+   ========================================================================== */
+nextjs-portal,
+[data-nextjs-portal],
+[data-next-badge],
+div[data-nextjs-toast-wrapper] {
+  display: none !important;
+}
