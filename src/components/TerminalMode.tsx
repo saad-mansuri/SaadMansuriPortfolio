@@ -10,7 +10,7 @@ import {
   certifications,
 } from "../data/portfolioData";
 import { usePortfolio } from "../context/PortfolioContext";
-import { ExternalLink, Mail, Phone, Terminal } from "lucide-react";
+import { ExternalLink, Mail, Terminal } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 
 interface TerminalLine {
@@ -68,7 +68,7 @@ export const TerminalMode = () => {
     }
     return [];
   });
-  const [historyIndex, setHistoryIndex] = useState<number | null>(null);
+  const [, setHistoryIndex] = useState<number | null>(null);
 
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -439,6 +439,7 @@ export const TerminalMode = () => {
       didMountRef.current = true;
       handleCommand("whoami");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Scroll to bottom whenever history or input updates

@@ -1,8 +1,23 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Projects } from "../../components/sections/Projects";
+import { SITE_URL } from "../../data/portfolioData";
+
+export const metadata: Metadata = {
+  title: "Key Projects & Platforms",
+  description:
+    "Explore enterprise SaaS platforms, cybersecurity risk modeling architectures, dynamic survey engines, and production web applications built by Saad Mansuri.",
+  alternates: {
+    canonical: `${SITE_URL}/projects`,
+  },
+  openGraph: {
+    title: "Key Projects & Platforms | Saad Mansuri",
+    description:
+      "Enterprise systems engineered for cybersecurity intelligence, risk modeling, dynamic survey workflows, and multi-tenant SaaS.",
+    url: `${SITE_URL}/projects`,
+  },
+};
 
 export default function ProjectsPage() {
   return (
@@ -24,13 +39,12 @@ export default function ProjectsPage() {
             <span>&larr; Back to Portfolio</span>
           </Link>
           <span className="text-zinc-300 dark:text-zinc-700">|</span>
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-zinc-700 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+          <a
+            href="#main-content"
+            className="text-zinc-700 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
           >
             Back to Top &uarr;
-          </button>
+          </a>
         </div>
       </footer>
     </main>

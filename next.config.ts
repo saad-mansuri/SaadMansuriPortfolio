@@ -2,9 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: "export",
   devIndicators: false,
-  cacheComponents: true,
-  partialPrefetching: true,
+  images: {
+    unoptimized: true,
+  },
   turbopack: {
     rules: {
       "*.css": {
@@ -12,14 +14,6 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/project",
-        destination: "/projects",
-      },
-    ];
   },
 };
 
