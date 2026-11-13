@@ -85,6 +85,7 @@ export const metadata: Metadata = {
     icon: `${BASE_PATH}/favicon.ico`,
     apple: `${BASE_PATH}/favicon.ico`,
   },
+  manifest: `${BASE_PATH}/manifest.json`,
 };
 
 const personSchema = {

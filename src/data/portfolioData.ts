@@ -46,9 +46,8 @@ export interface SkillCategory {
   skills: string[];
 }
 
-// UPDATED (Correct for https://dev.rushazzmakeupstudio.com)
-export const SITE_URL = "https://dev.rushazzmakeupstudio.com";
-export const BASE_PATH = "";
+export const SITE_URL = "http://rushazzmakeupstudio.com/dev/saad-mansuri";
+export const BASE_PATH = "/dev/saad-mansuri";
 
 export const personalInfo = {
   name: "Saad Mansuri",

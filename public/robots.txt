@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://rushazzmakeupstudio.com/dev/saad-mansuri/sitemap.xml
