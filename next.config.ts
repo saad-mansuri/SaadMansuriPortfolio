@@ -2,9 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: "export",
+  basePath: "/dev/saad-mansuri",
   devIndicators: false,
-  cacheComponents: true,
-  partialPrefetching: true,
   images: {
     unoptimized: true,
   },
@@ -15,14 +15,6 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/project",
-        destination: "/projects",
-      },
-    ];
   },
 };
 

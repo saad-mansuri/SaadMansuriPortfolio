@@ -5,10 +5,10 @@ import Image from "next/image";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../Icons";
 import { RainbowRevealText } from "../RainbowRevealText";
-import { personalInfo } from "../../data/portfolioData";
+import { personalInfo, BASE_PATH } from "../../data/portfolioData";
 
 export const Hero = () => {
-  const [imgSrc, setImgSrc] = useState("/images/saad-mansuri.webp");
+  const [imgSrc, setImgSrc] = useState(`${BASE_PATH}/images/saad-mansuri.webp`);
   return (
     <header className="w-full text-left pt-6 sm:pt-10 pb-4 relative z-10">
       <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 md:gap-10">
@@ -92,9 +92,9 @@ export const Hero = () => {
               unoptimized
               onError={() => {
                 setImgSrc((current) => {
-                  if (current === "/images/saad-mansuri.webp") return "/images/saad-mansuri.jpg";
-                  if (current === "/images/saad-mansuri.jpg") return "/saad-mansuri.webp";
-                  if (current === "/saad-mansuri.webp") return "/saad-mansuri.jpg";
+                  if (current === `${BASE_PATH}/images/saad-mansuri.webp`) return `${BASE_PATH}/images/saad-mansuri.jpg`;
+                  if (current === `${BASE_PATH}/images/saad-mansuri.jpg`) return `${BASE_PATH}/saad-mansuri.webp`;
+                  if (current === `${BASE_PATH}/saad-mansuri.webp`) return `${BASE_PATH}/saad-mansuri.jpg`;
                   return current;
                 });
               }}
